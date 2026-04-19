@@ -1,0 +1,113 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+  {{!-- CABECERA --}}
+  <header class="sheet-header flexrow">
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" width="100" height="100" />
+    <div class="header-fields">
+      <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Nombre" /></h1>
+      <div class="flexrow header-info">
+        <span>Reino: <input name="system.trasfondo.reino" type="text" value="{{system.trasfondo.reino}}" /></span>
+        <span>Religión: <input name="system.trasfondo.religion" type="text" value="{{system.trasfondo.religion}}" /></span>
+        <span>Profesión: <input name="system.trasfondo.profesion" type="text" value="{{system.trasfondo.profesion}}" /></span>
+      </div>
+    </div>
+  </header>
+
+  {{!-- RECURSOS PRINCIPALES --}}
+  <section class="main-resources flexrow">
+    <div class="resource pv">
+      <label>PV</label>
+      <input type="text" name="system.derivados.pv.value" value="{{system.derivados.pv.value}}" />
+      <span> / {{system.derivados.pv.max}}</span>
+      <div class="condicion-label" style="margin-top: 4px; font-size: 0.9em; font-weight: bold; text-align: center;">
+        {{condicion}}
+      </div>
+    </div>
+    <div class="resource rac">
+      <label>RAC</label>
+      <input type="number" name="system.derivados.racionalidad" value="{{system.derivados.racionalidad}}" min="-100" max="100" data-dtype="Number" />
+      <a class="rollable-derivado" data-derivado="racionalidad" title="Tirada de Racionalidad"><i class="fas fa-dice-d20"></i></a>
+      <div class="sub-resource">
+        <label>PF</label>
+        <input type="number" name="system.derivados.pf.value" value="{{system.derivados.pf.value}}" data-dtype="Number" />
+        <span> / {{system.derivados.pf.max}}</span>
+      </div>
+    </div>
+    <div class="resource irr">
+      <label>IRR</label>
+      <input type="number" name="system.derivados.irracionalidad" value="{{system.derivados.irracionalidad}}" min="0" max="200" data-dtype="Number" />
+      <a class="rollable-derivado" data-derivado="irracionalidad" title="Tirada de Irracionalidad"><i class="fas fa-dice-d20"></i></a>
+      <div class="sub-resource">
+        <label>PC</label>
+        <input type="number" name="system.derivados.pc.value" value="{{system.derivados.pc.value}}" data-dtype="Number" />
+        <span> / {{system.derivados.pc.max}}</span>
+      </div>
+    </div>
+    <div class="resource templanza">
+      <label>Templanza</label>
+      <input type="number" name="system.derivados.templanza" value="{{system.derivados.templanza}}" data-dtype="Number" />
+      <a class="rollable-derivado" data-derivado="templanza" title="Tirada de Templanza"><i class="fas fa-dice-d20"></i></a>
+    </div>
+  </section>
+
+  {{!-- PESTAÑAS --}}
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="caracteristicas">Características</a>
+    <a class="item" data-tab="competencias">Competencias</a>
+    <a class="item" data-tab="combate">Combate</a>
+    <a class="item" data-tab="magia">Magia</a>
+    <a class="item" data-tab="equipo">Equipo</a>
+    <a class="item" data-tab="biografia">Biografía</a>
+  </nav>
+
+  {{!-- CUERPO --}}
+  <section class="sheet-body">
+
+    {{!-- TAB CARACTERÍSTICAS --}}
+    <div class="tab" data-group="primary" data-tab="caracteristicas">
+      {{> "systems/akers_aquelarre/templates/actor/parts/actor-caracteristicas.hbs"}}
+    </div>
+
+    {{!-- TAB COMPETENCIAS --}}
+    <div class="tab" data-group="primary" data-tab="competencias">
+      {{> "systems/akers_aquelarre/templates/actor/parts/actor-competencias.hbs"}}
+    </div>
+
+    {{!-- TAB COMBATE --}}
+    <div class="tab" data-group="primary" data-tab="combate">
+      {{> "systems/akers_aquelarre/templates/actor/parts/actor-combate.hbs"}}
+    </div>
+
+    {{!-- TAB MAGIA --}}
+    <div class="tab" data-group="primary" data-tab="magia">
+      {{> "systems/akers_aquelarre/templates/actor/parts/actor-magia.hbs"}}
+    </div>
+
+    {{!-- TAB EQUIPO --}}
+    <div class="tab" data-group="primary" data-tab="equipo">
+      {{> "systems/akers_aquelarre/templates/actor/parts/actor-equipo.hbs"}}
+    </div>
+
+    {{!-- TAB BIOGRAFÍA --}}
+    <div class="tab" data-group="primary" data-tab="biografia">
+      <div class="flexrow bio-fields">
+        <div class="form-group">
+          <label>Sexo</label>
+          <input type="text" name="system.trasfondo.sexo" value="{{system.trasfondo.sexo}}" placeholder="Varón / Mujer" />
+        </div>
+        <div class="form-group">
+          <label>Edad</label>
+          <input type="number" name="system.trasfondo.edad" value="{{system.trasfondo.edad}}" data-dtype="Number" />
+        </div>
+        <div class="form-group">
+          <label>Pueblo</label>
+          <input type="text" name="system.trasfondo.pueblo" value="{{system.trasfondo.pueblo}}" />
+        </div>
+      </div>
+      <div class="editor-container">
+        {{editor system.biografia target="system.biografia" button=true editable=editable}}
+      </div>
+    </div>
+
+  </section>
+</form>

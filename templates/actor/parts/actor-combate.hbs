@@ -1,0 +1,47 @@
+{{!-- Partial: Combate (armas + armaduras + heridas) --}}
+<h3>{{localize "AQUELARRE.Armas"}}</h3>
+<ol class="items-list armas-list">
+  <li class="items-header flexrow">
+    <span class="item-name">Arma</span>
+    <span class="item-detail">Daño</span>
+    <span class="item-detail">Tipo</span>
+    <span class="item-controls"></span>
+  </li>
+  {{#each armas as |arma|}}
+  <li class="item flexrow" data-item-id="{{arma._id}}">
+    <span class="item-name">{{arma.name}}</span>
+    <span class="item-detail">{{arma.system.dano}}</span>
+    <span class="item-detail">{{arma.system.tipo}}</span>
+    <span class="item-controls">
+      <a class="item-roll" title="Atacar"><i class="fas fa-dice-d20"></i></a>
+      <a class="item-edit" title="Editar"><i class="fas fa-edit"></i></a>
+      <a class="item-delete" title="Borrar"><i class="fas fa-trash"></i></a>
+    </span>
+  </li>
+  {{/each}}
+</ol>
+
+<h3>{{localize "AQUELARRE.Armaduras"}}</h3>
+<ol class="items-list armaduras-list">
+  {{#each armaduras as |arm|}}
+  <li class="item flexrow" data-item-id="{{arm._id}}">
+    <span class="item-name">{{arm.name}}</span>
+    <span class="item-detail">Cab: {{arm.system.proteccion.cabeza}}</span>
+    <span class="item-detail">Tor: {{arm.system.proteccion.torso}}</span>
+    <span class="item-controls">
+      <a class="item-edit" title="Editar"><i class="fas fa-edit"></i></a>
+      <a class="item-delete" title="Borrar"><i class="fas fa-trash"></i></a>
+    </span>
+  </li>
+  {{/each}}
+</ol>
+
+<h3>{{localize "AQUELARRE.Heridas"}}</h3>
+<div class="heridas-grid">
+  {{#each system.heridas as |val key|}}
+  <div class="herida">
+    <label>{{localize (concat "AQUELARRE.Localizacion." key)}}</label>
+    <input type="number" name="system.heridas.{{key}}" value="{{val}}" data-dtype="Number" />
+  </div>
+  {{/each}}
+</div>

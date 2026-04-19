@@ -1,0 +1,45 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+  <header class="sheet-header flexrow">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" width="60" height="60" />
+    <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Nombre" /></h1>
+  </header>
+
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="datos">Datos</a>
+    <a class="item" data-tab="descripcion">Descripción</a>
+  </nav>
+
+  <section class="sheet-body">
+    <div class="tab" data-group="primary" data-tab="datos">
+      <div class="form-group"><label>Competencia</label><input type="text" name="system.competencia" value="{{system.competencia}}" /></div>
+      <div class="form-group"><label>Caract. Base</label><select name="system.caracteristicaBase">
+        {{#select system.caracteristicaBase}}
+        <option value="">—</option>
+        <option value="fue">FUE</option>
+        <option value="agi">AGI</option>
+        <option value="hab">HAB</option>
+        <option value="per">PER</option>
+        {{/select}}
+      </select></div>
+      <div class="form-group"><label>Tamaño</label><select name="system.tamano">
+        {{#select system.tamano}}
+        <option value="ligero">Ligero</option>
+        <option value="medio">Medio</option>
+        <option value="pesado">Pesado</option>
+        {{/select}}
+      </select></div>
+      <div class="form-group"><label>Daño</label><input type="text" name="system.dano" value="{{system.dano}}" /></div>
+      <div class="form-group"><label>FUE Mínima</label><input type="number" name="system.fuerzaMinima" value="{{system.fuerzaMinima}}" data-dtype="Number" /></div>
+      <div class="form-group"><label>Manos</label><input type="number" name="system.manos" value="{{system.manos}}" data-dtype="Number" /></div>
+      <div class="form-group"><label>Alcance</label><input type="text" name="system.alcance" value="{{system.alcance}}" /></div>
+      <div class="form-group"><label>Recarga (asaltos)</label><input type="number" name="system.recarga" value="{{system.recarga}}" data-dtype="Number" /></div>
+      <div class="form-group"><label>Resistencia</label><input type="number" name="system.resistencia" value="{{system.resistencia}}" data-dtype="Number" /></div>
+      <div class="form-group"><label>Proyectil</label><input type="checkbox" name="system.esProyectil" {{checked system.esProyectil}} /></div>
+      <div class="form-group"><label>Peso</label><input type="number" name="system.peso" value="{{system.peso}}" data-dtype="Number" /></div>
+      <div class="form-group"><label>Precio (mrs)</label><input type="number" name="system.precio" value="{{system.precio}}" data-dtype="Number" /></div>
+    </div>
+    <div class="tab" data-group="primary" data-tab="descripcion">
+      {{> "systems/akers_aquelarre/templates/item/parts/item-descripcion.hbs"}}
+    </div>
+  </section>
+</form>

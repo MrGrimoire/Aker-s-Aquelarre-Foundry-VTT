@@ -1,0 +1,22 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+  <header class="sheet-header flexrow">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" width="60" height="60" />
+    <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Nombre" /></h1>
+  </header>
+
+  <section class="sheet-body">
+    <div class="form-group"><label>Tipo</label><select name="system.tipo">
+      {{#select system.tipo}}
+      <option value="ventaja">Ventaja</option>
+      <option value="desventaja">Desventaja</option>
+      <option value="orgullo">Orgullo</option>
+      <option value="verguenza">Vergüenza</option>
+      {{/select}}
+    </select></div>
+    <div class="form-group"><label>Coste (puntos)</label><input type="number" name="system.coste" value="{{system.coste}}" min="0" max="3" data-dtype="Number" /></div>
+    <div class="form-group"><label>Efecto</label><input type="text" name="system.efecto" value="{{system.efecto}}" /></div>
+    <div class="editor-container">
+      {{editor system.descripcion target="system.descripcion" button=true editable=editable}}
+    </div>
+  </section>
+</form>

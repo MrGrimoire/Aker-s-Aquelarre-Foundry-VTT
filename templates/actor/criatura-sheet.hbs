@@ -1,0 +1,62 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+  <header class="sheet-header flexrow">
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" width="80" height="80" />
+    <div class="header-fields">
+      <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Nombre" /></h1>
+      <div class="flexrow header-info">
+        <span>Tipo: <input name="system.tipo" type="text" value="{{system.tipo}}" /></span>
+        <div class="resource pv">
+          <label>PV</label>
+          <input type="number" name="system.derivados.pv.value" value="{{system.derivados.pv.value}}" data-dtype="Number" />
+          <span> / {{system.derivados.pv.max}}</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="caracteristicas">Características</a>
+    <a class="item" data-tab="ataques">Ataques</a>
+    <a class="item" data-tab="descripcion">Descripción</a>
+  </nav>
+
+  <section class="sheet-body">
+    <div class="tab" data-group="primary" data-tab="caracteristicas">
+      <table class="caracteristicas-table">
+        <tbody>
+          {{#each system.caracteristicas as |car key|}}
+          <tr>
+            <td>{{localize (concat "AQUELARRE.Caracteristica." key)}}</td>
+            <td><input type="number" name="system.caracteristicas.{{key}}.value" value="{{car.value}}" data-dtype="Number" /></td>
+            <td>{{car.total}}</td>
+            <td><a class="rollable-car" data-car="{{key}}"><i class="fas fa-dice-d20"></i></a></td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      <div class="derivado">
+        <label>Protección natural</label>
+        <input type="number" name="system.proteccion" value="{{system.proteccion}}" data-dtype="Number" />
+      </div>
+    </div>
+
+    <div class="tab" data-group="primary" data-tab="ataques">
+      <h3>Ataques naturales</h3>
+      <ol class="items-list">
+        {{#each system.ataquesNaturales as |atk idx|}}
+        <li class="flexrow">
+          <span>{{atk.nombre}}</span>
+          <span>{{atk.dano}}</span>
+          <span>{{atk.competencia}}%</span>
+        </li>
+        {{/each}}
+      </ol>
+    </div>
+
+    <div class="tab" data-group="primary" data-tab="descripcion">
+      <div class="editor-container">
+        {{editor system.descripcion target="system.descripcion" button=true editable=editable}}
+      </div>
+    </div>
+  </section>
+</form>

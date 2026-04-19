@@ -1,0 +1,33 @@
+{{!-- Partial: Equipo genérico + rasgos + economía --}}
+<div class="economia flexrow">
+  <label>{{localize "AQUELARRE.Maravedies"}}</label>
+  <input type="number" name="system.economia.maravedies" value="{{system.economia.maravedies}}" data-dtype="Number" />
+</div>
+
+<h3>{{localize "AQUELARRE.Equipo"}}</h3>
+<ol class="items-list equipo-list">
+  {{#each equipo as |eq|}}
+  <li class="item flexrow" data-item-id="{{eq._id}}">
+    <span class="item-name">{{eq.name}}</span>
+    <span class="item-detail">×{{eq.system.cantidad}}</span>
+    <span class="item-controls">
+      <a class="item-edit" title="Editar"><i class="fas fa-edit"></i></a>
+      <a class="item-delete" title="Borrar"><i class="fas fa-trash"></i></a>
+    </span>
+  </li>
+  {{/each}}
+</ol>
+
+<h3>{{localize "AQUELARRE.Rasgos"}}</h3>
+<ol class="items-list rasgos-list">
+  {{#each rasgos as |r|}}
+  <li class="item flexrow" data-item-id="{{r._id}}">
+    <span class="item-name">{{r.name}}</span>
+    <span class="item-detail">{{r.system.tipo}}</span>
+    <span class="item-controls">
+      <a class="item-edit" title="Editar"><i class="fas fa-edit"></i></a>
+      <a class="item-delete" title="Borrar"><i class="fas fa-trash"></i></a>
+    </span>
+  </li>
+  {{/each}}
+</ol>

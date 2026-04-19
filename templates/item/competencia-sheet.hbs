@@ -1,0 +1,48 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+  <header class="sheet-header flexrow">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" width="60" height="60" />
+    <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Nombre" /></h1>
+  </header>
+
+  <section class="sheet-body">
+    <div class="form-group">
+      <label>Característica</label>
+      <select name="system.caracteristica">
+        {{#select system.caracteristica}}
+        <option value="">—</option>
+        <option value="fue">FUE</option>
+        <option value="agi">AGI</option>
+        <option value="hab">HAB</option>
+        <option value="res">RES</option>
+        <option value="per">PER</option>
+        <option value="com">COM</option>
+        <option value="cul">CUL</option>
+      <option value="asp">ASP</option>
+        {{/select}}
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Tipo</label>
+      <select name="system.tipo">
+        {{#select system.tipo}}
+        <option value="normal">Normal</option>
+        <option value="paterna">Paterna</option>
+        <option value="primaria2">Primaria ×2</option>
+        <option value="primaria3">Primaria ×3</option>
+        <option value="secundaria">Secundaria</option>
+        {{/select}}
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Puntos extra</label>
+      <input type="number" name="system.bonus" value="{{system.bonus}}" min="0" data-dtype="Number" />
+    </div>
+    <div class="form-group">
+      <label>Tipo de arma</label>
+      <input type="text" name="system.tipoArma" value="{{system.tipoArma}}" />
+    </div>
+    <div class="editor-container">
+      {{editor system.descripcion target="system.descripcion" button=true editable=editable}}
+    </div>
+  </section>
+</form>

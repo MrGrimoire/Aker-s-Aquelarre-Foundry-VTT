@@ -1,0 +1,45 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+  <header class="sheet-header flexrow">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" width="60" height="60" />
+    <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Nombre" /></h1>
+  </header>
+
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="datos">Datos</a>
+    <a class="item" data-tab="descripcion">Descripción</a>
+  </nav>
+
+  <section class="sheet-body">
+    <div class="tab" data-group="primary" data-tab="datos">
+      <div class="form-group"><label>Tipo</label><select name="system.tipoArmadura">
+        {{#select system.tipoArmadura}}
+        <option value="blanda">Blanda</option>
+        <option value="ligera">Ligera</option>
+        <option value="metalica">Metálica</option>
+        <option value="completa">Completa</option>
+        <option value="casco">Casco</option>
+        <option value="animal">Animal</option>
+        {{/select}}
+      </select></div>
+      <div class="form-group"><label>Protección</label><input type="number" name="system.proteccion" value="{{system.proteccion}}" data-dtype="Number" /></div>
+      <h3>Localizaciones cubiertas</h3>
+      <div class="form-group"><label>Cabeza</label><input type="checkbox" name="system.localizaciones.cabeza" {{checked system.localizaciones.cabeza}} /></div>
+      <div class="form-group"><label>Torso</label><input type="checkbox" name="system.localizaciones.torso" {{checked system.localizaciones.torso}} /></div>
+      <div class="form-group"><label>Brazos</label><input type="checkbox" name="system.localizaciones.brazos" {{checked system.localizaciones.brazos}} /></div>
+      <div class="form-group"><label>Piernas</label><input type="checkbox" name="system.localizaciones.piernas" {{checked system.localizaciones.piernas}} /></div>
+      <hr />
+      <div class="form-group"><label>Resistencia</label><input type="number" name="system.resistencia" value="{{system.resistencia}}" data-dtype="Number" /> / <input type="number" name="system.resistenciaMax" value="{{system.resistenciaMax}}" data-dtype="Number" /></div>
+      <div class="form-group"><label>FUE Mínima</label><input type="number" name="system.fuerzaMinima" value="{{system.fuerzaMinima}}" data-dtype="Number" /></div>
+      <h3>Penalizaciones</h3>
+      <div class="form-group"><label>Competencias</label><input type="number" name="system.penalizacion.competencias" value="{{system.penalizacion.competencias}}" data-dtype="Number" /></div>
+      <div class="form-group"><label>Percepción</label><input type="number" name="system.penalizacion.percepcion" value="{{system.penalizacion.percepcion}}" data-dtype="Number" /></div>
+      <hr />
+      <div class="form-group"><label>Peso</label><input type="number" name="system.peso" value="{{system.peso}}" data-dtype="Number" /></div>
+      <div class="form-group"><label>Precio (mrs)</label><input type="number" name="system.precio" value="{{system.precio}}" data-dtype="Number" /></div>
+      <div class="form-group"><label>Equipada</label><input type="checkbox" name="system.equipada" {{checked system.equipada}} /></div>
+    </div>
+    <div class="tab" data-group="primary" data-tab="descripcion">
+      {{> "systems/akers_aquelarre/templates/item/parts/item-descripcion.hbs"}}
+    </div>
+  </section>
+</form>

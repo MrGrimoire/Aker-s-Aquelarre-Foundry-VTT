@@ -1,0 +1,53 @@
+{
+  "id": "akers_aquelarre",
+  "title": "Aquelarre (Akers)",
+  "description": "Sistema para el juego de rol demoníaco-medieval Aquelarre, ambientado en la Península Ibérica durante la Edad Media (siglos XIII-XV). Basado en el sistema BRP (Basic Role-Playing) con tiradas percentiles d100.",
+  "version": "0.1.0",
+  "compatibility": {
+    "minimum": "12",
+    "verified": "12.328"
+  },
+  "authors": [
+    {
+      "name": "Zarrok",
+      "discord": "mephisto_207"
+    },
+    {
+      "name": "Weiss Acker",
+      "discord": "weissacker"
+    }
+  ],
+  "esmodules": ["aquelarre.mjs"],
+  "styles": ["styles/aquelarre.css"],
+  "languages": [
+    {
+      "lang": "es",
+      "name": "Español",
+      "path": "lang/es.json"
+    }
+  ],
+  "documentTypes": {
+    "Actor": {
+      "personaje": {},
+      "pnj": {},
+      "criatura": {}
+    },
+    "Item": {
+      "arma": {},
+      "armadura": {},
+      "competencia": {},
+      "hechizo": {},
+      "profesion": {},
+      "equipo": {},
+      "rasgo": {}
+    }
+  },
+  "socket": false,
+  "initiative": "1d10 + @iniciativa",
+  "grid": {
+    "distance": 1.5,
+    "units": "m"
+  },
+  "primaryTokenAttribute": "derivados.pv",
+  "secondaryTokenAttribute": "derivados.irracionalidad"
+}

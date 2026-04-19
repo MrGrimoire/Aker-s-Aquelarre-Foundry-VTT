@@ -1,0 +1,23 @@
+{{!-- Partial: Lista de hechizos --}}
+<ol class="items-list hechizos-list">
+  <li class="items-header flexrow">
+    <span class="item-name">{{localize "AQUELARRE.Hechizo"}}</span>
+    <span class="item-detail">Tradición</span>
+    <span class="item-detail">Nivel</span>
+    <span class="item-detail">IRR</span>
+    <span class="item-controls"></span>
+  </li>
+  {{#each hechizos as |h|}}
+  <li class="item flexrow" data-item-id="{{h._id}}">
+    <span class="item-name">{{h.name}}</span>
+    <span class="item-detail">{{h.system.tradicion}}</span>
+    <span class="item-detail">{{h.system.nivel}}</span>
+    <span class="item-detail">{{h.system.costeIrr}}</span>
+    <span class="item-controls">
+      <a class="item-roll" title="Lanzar"><i class="fas fa-magic"></i></a>
+      <a class="item-edit" title="Editar"><i class="fas fa-edit"></i></a>
+      <a class="item-delete" title="Borrar"><i class="fas fa-trash"></i></a>
+    </span>
+  </li>
+  {{/each}}
+</ol>

@@ -1,0 +1,49 @@
+{{!-- Partial: Tabla de características --}}
+<table class="caracteristicas-table">
+  <thead>
+    <tr>
+      <th>Característica</th>
+      <th>Valor</th>
+      <th>Mod</th>
+      <th>Total</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each system.caracteristicas as |car key|}}
+    <tr>
+      <td class="car-name">{{lookup @root.config.caracteristicas key}}</td>
+      <td><input type="number" name="system.caracteristicas.{{key}}.value" value="{{car.value}}" data-dtype="Number" /></td>
+      <td><input type="number" name="system.caracteristicas.{{key}}.tempMod" value="{{car.tempMod}}" data-dtype="Number" /></td>
+      <td class="car-total">{{car.total}}</td>
+      <td><a class="rollable-car" data-car="{{key}}" title="Tirada de {{lookup @root.config.caracteristicas key}}"><i class="fas fa-dice-d20"></i></a></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+{{!-- Característica Secundaria: Aspecto --}}
+<div class="derivados-extra flexrow" style="margin-top:6px;">
+  <div class="derivado">
+    <label>Aspecto</label>
+    <input type="number" name="system.aspecto.value" value="{{system.aspecto.value}}" data-dtype="Number" style="width:40px;text-align:center;" />
+    <span style="font-size:0.85em;color:#666;">mod</span>
+    <input type="number" name="system.aspecto.tempMod" value="{{system.aspecto.tempMod}}" data-dtype="Number" style="width:40px;text-align:center;" />
+    <span class="car-total" style="margin-left:4px;">= {{system.aspecto.total}}</span>
+    <a class="rollable-car" data-car="asp" title="Tirada de Aspecto"><i class="fas fa-dice-d20"></i></a>
+  </div>
+</div>
+
+{{!-- Derivados adicionales --}}
+<div class="derivados-extra flexrow">
+  <div class="derivado">
+    <label>Suerte</label>
+    <input type="number" name="system.derivados.suerte.value" value="{{system.derivados.suerte.value}}" data-dtype="Number" />
+    <span> / {{system.derivados.suerte.max}}</span>
+    <a class="rollable-derivado" data-derivado="suerte" title="Tirada de Suerte"><i class="fas fa-dice-d20"></i></a>
+  </div>
+  <div class="derivado">
+    <label>Iniciativa</label>
+    <a class="rollable-iniciativa" title="Tirada de Iniciativa"><i class="fas fa-dice-d20"></i> 1d10+AGI</a>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+  <header class="sheet-header flexrow">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" width="60" height="60" />
+    <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Nombre" /></h1>
+  </header>
+
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="datos">Datos</a>
+    <a class="item" data-tab="descripcion">Descripción</a>
+  </nav>
+
+  <section class="sheet-body">
+    <div class="tab" data-group="primary" data-tab="datos">
+      <div class="form-group"><label>Cantidad</label><input type="number" name="system.cantidad" value="{{system.cantidad}}" data-dtype="Number" /></div>
+      <div class="form-group"><label>Peso</label><input type="number" name="system.peso" value="{{system.peso}}" data-dtype="Number" /></div>
+      <div class="form-group"><label>Precio (mrs)</label><input type="number" name="system.precio" value="{{system.precio}}" data-dtype="Number" /></div>
+    </div>
+    <div class="tab" data-group="primary" data-tab="descripcion">
+      {{> "systems/akers_aquelarre/templates/item/parts/item-descripcion.hbs"}}
+    </div>
+  </section>
+</form>

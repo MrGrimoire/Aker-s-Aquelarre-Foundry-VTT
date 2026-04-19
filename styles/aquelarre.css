@@ -1,0 +1,366 @@
+/* ============================================================
+   AQUELARRE — Hoja de estilos base (Fase 0 scaffolding)
+   ============================================================ */
+
+/* ---------- Variables ---------- */
+:root {
+  --aq-color-bg: #f5f0e6;
+  --aq-color-header: #3d2b1f;
+  --aq-color-accent: #8b0000;
+  --aq-color-border: #8b7d6b;
+  --aq-color-text: #1a1a1a;
+  --aq-font-body: "Alegreya", serif;
+  --aq-font-heading: "Alegreya SC", serif;
+}
+
+/* ---------- Ficha general ---------- */
+.aquelarre.sheet {
+  font-family: var(--aq-font-body);
+  color: var(--aq-color-text);
+  background: var(--aq-color-bg);
+}
+
+.aquelarre.sheet .window-content {
+  padding: 4px 8px;
+}
+
+/* ---------- Cabecera ---------- */
+.aquelarre .sheet-header {
+  gap: 8px;
+  padding: 4px 0;
+  border-bottom: 2px solid var(--aq-color-border);
+  margin-bottom: 6px;
+}
+
+.aquelarre .profile-img {
+  border: 2px solid var(--aq-color-border);
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.aquelarre .charname input {
+  font-family: var(--aq-font-heading);
+  font-size: 1.4em;
+  color: var(--aq-color-header);
+  border: none;
+  border-bottom: 1px solid var(--aq-color-border);
+  background: transparent;
+  width: 100%;
+}
+
+.aquelarre .header-info {
+  gap: 10px;
+  font-size: 0.85em;
+}
+
+.aquelarre .header-info input {
+  width: 120px;
+}
+
+/* ---------- Recursos principales ---------- */
+.aquelarre .main-resources {
+  gap: 12px;
+  justify-content: center;
+  margin: 6px 0;
+}
+
+.aquelarre .resource {
+  text-align: center;
+}
+
+.aquelarre .resource label {
+  font-family: var(--aq-font-heading);
+  font-weight: bold;
+  color: var(--aq-color-accent);
+}
+
+.aquelarre .resource input[type="number"] {
+  width: 44px;
+  text-align: center;
+}
+
+/* Sub-recurso (PF / PC debajo de RAC / IRR) */
+.aquelarre .sub-resource {
+  margin-top: 2px;
+  font-size: 0.8em;
+}
+
+.aquelarre .sub-resource label {
+  font-size: 0.85em;
+  color: var(--aq-color-header);
+}
+
+.aquelarre .sub-resource input[type="number"] {
+  width: 32px;
+  text-align: center;
+  font-size: 0.9em;
+}
+
+.aquelarre .sub-resource span {
+  font-size: 0.9em;
+}
+
+/* Biografía campos */
+.aquelarre .bio-fields {
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.aquelarre .bio-fields .form-group {
+  flex: 1;
+}
+
+.aquelarre .bio-fields input {
+  width: 100%;
+}
+
+/* ---------- Pestañas ---------- */
+.aquelarre .sheet-tabs {
+  border-bottom: 2px solid var(--aq-color-border);
+  margin-bottom: 6px;
+}
+
+.aquelarre .sheet-tabs .item {
+  font-family: var(--aq-font-heading);
+  font-size: 0.85em;
+  padding: 2px 8px;
+  color: var(--aq-color-header);
+}
+
+.aquelarre .sheet-tabs .item.active {
+  border-bottom: 3px solid var(--aq-color-accent);
+  color: var(--aq-color-accent);
+}
+
+/* ---------- Tabla de características ---------- */
+.aquelarre .caracteristicas-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.aquelarre .caracteristicas-table th,
+.aquelarre .caracteristicas-table td {
+  padding: 2px 4px;
+  text-align: center;
+}
+
+.aquelarre .caracteristicas-table .car-name {
+  text-align: left;
+  font-family: var(--aq-font-heading);
+  font-weight: bold;
+}
+
+.aquelarre .caracteristicas-table input[type="number"] {
+  width: 40px;
+  text-align: center;
+}
+
+.aquelarre .car-total {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+/* ---------- Listas de items ---------- */
+.aquelarre .items-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.aquelarre .items-header {
+  font-family: var(--aq-font-heading);
+  font-weight: bold;
+  font-size: 0.85em;
+  border-bottom: 1px solid var(--aq-color-border);
+  padding-bottom: 2px;
+  margin-bottom: 2px;
+}
+
+.aquelarre .items-list .item {
+  border-bottom: 1px solid rgba(139, 125, 107, 0.3);
+  padding: 2px 0;
+}
+
+.aquelarre .items-list .flexrow {
+  align-items: center;
+  gap: 6px;
+}
+
+.aquelarre .item-name {
+  flex: 2;
+}
+
+.aquelarre .item-detail {
+  flex: 1;
+  text-align: center;
+  font-size: 0.9em;
+}
+
+.aquelarre .item-controls {
+  flex: 0 0 60px;
+  text-align: right;
+}
+
+.aquelarre .item-controls a {
+  margin-left: 4px;
+  color: var(--aq-color-header);
+  opacity: 0.6;
+}
+
+.aquelarre .item-controls a:hover {
+  opacity: 1;
+  color: var(--aq-color-accent);
+}
+
+/* ---------- Rollable ---------- */
+.aquelarre .rollable-car,
+.aquelarre .rollable-comp,
+.aquelarre .item-roll {
+  cursor: pointer;
+}
+
+.aquelarre .rollable-car:hover,
+.aquelarre .rollable-comp:hover,
+.aquelarre .item-roll:hover {
+  color: var(--aq-color-accent);
+  text-shadow: 0 0 6px rgba(139, 0, 0, 0.4);
+}
+
+/* ---------- Heridas ---------- */
+.aquelarre .heridas-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+/* ---------- Competencias ---------- */
+.aquelarre .competencias-controls {
+  gap: 8px;
+  margin-bottom: 6px;
+  align-items: center;
+}
+
+.aquelarre .comp-search-input {
+  flex: 1;
+  max-width: 200px;
+  font-size: 0.85em;
+  padding: 2px 6px;
+  border: 1px solid var(--aq-color-border);
+  border-radius: 3px;
+}
+
+.aquelarre .competencias-controls a {
+  cursor: pointer;
+  color: var(--aq-color-accent);
+  font-size: 0.85em;
+  white-space: nowrap;
+}
+
+.aquelarre .competencias-controls a:hover {
+  text-decoration: underline;
+}
+
+.aquelarre .competencias-list .comp-check-col {
+  flex: 0 0 24px;
+  text-align: center;
+}
+
+.aquelarre .competencias-list .comp-check-col input[type="checkbox"] {
+  margin: 0;
+  cursor: pointer;
+}
+
+.aquelarre .competencias-list .comp-name {
+  flex: 3;
+}
+
+.aquelarre .competencias-list .comp-car-col {
+  flex: 0 0 36px;
+  text-align: center;
+  font-size: 0.85em;
+}
+
+.aquelarre .competencias-list .comp-tipo-col {
+  flex: 0 0 80px;
+  text-align: center;
+}
+
+.aquelarre .competencias-list .comp-tipo-col select {
+  width: 100%;
+  font-size: 0.75em;
+  padding: 1px 2px;
+}
+
+.aquelarre .competencias-list .comp-bonus-col {
+  flex: 0 0 46px;
+  text-align: center;
+}
+
+.aquelarre .competencias-list .comp-bonus-col input {
+  width: 38px;
+  text-align: center;
+  font-size: 0.85em;
+}
+
+.aquelarre .competencias-list .comp-total-col {
+  flex: 0 0 50px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.aquelarre .herida {
+  text-align: center;
+}
+
+.aquelarre .herida input {
+  width: 40px;
+  text-align: center;
+}
+
+/* ---------- Derivados extra ---------- */
+.aquelarre .derivados-extra {
+  gap: 14px;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.aquelarre .derivado {
+  text-align: center;
+}
+
+/* ---------- Form groups (item sheets) ---------- */
+.aquelarre .form-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.aquelarre .form-group label {
+  flex: 0 0 120px;
+  font-weight: bold;
+  font-size: 0.9em;
+  text-align: right;
+}
+
+.aquelarre .form-group input,
+.aquelarre .form-group select {
+  flex: 1;
+}
+
+/* ---------- Editor ---------- */
+.aquelarre .editor-container {
+  height: 200px;
+}
+
+/* ---------- Flexrow helper ---------- */
+.flexrow {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.flexcol {
+  display: flex;
+  flex-direction: column;
+}

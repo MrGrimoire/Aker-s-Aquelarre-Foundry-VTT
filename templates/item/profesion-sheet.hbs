@@ -1,0 +1,50 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+  <header class="sheet-header flexrow">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" width="60" height="60" />
+    <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Nombre" /></h1>
+  </header>
+
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="datos">Datos</a>
+    <a class="item" data-tab="descripcion">Descripción</a>
+  </nav>
+
+  <section class="sheet-body">
+    <div class="tab" data-group="primary" data-tab="datos">
+      <div class="form-group"><label>Sociedad</label><select name="system.sociedad">
+        {{#select system.sociedad}}
+        <option value="cristiana">Cristiana</option>
+        <option value="islamica">Islámica</option>
+        <option value="judia">Judía</option>
+        {{/select}}
+      </select></div>
+      <div class="form-group"><label>Clase social</label><input type="text" name="system.claseSocial" value="{{system.claseSocial}}" /></div>
+      <div class="form-group"><label>Ingresos mensuales</label><input type="text" name="system.ingresosMensuales" value="{{system.ingresosMensuales}}" /></div>
+
+      <h3>Mínimos de Características</h3>
+      <div class="flexrow">
+        <div class="form-group"><label>FUE</label><input type="number" name="system.minimosCaracteristicas.fue" value="{{system.minimosCaracteristicas.fue}}" data-dtype="Number" /></div>
+        <div class="form-group"><label>AGI</label><input type="number" name="system.minimosCaracteristicas.agi" value="{{system.minimosCaracteristicas.agi}}" data-dtype="Number" /></div>
+        <div class="form-group"><label>HAB</label><input type="number" name="system.minimosCaracteristicas.hab" value="{{system.minimosCaracteristicas.hab}}" data-dtype="Number" /></div>
+        <div class="form-group"><label>RES</label><input type="number" name="system.minimosCaracteristicas.res" value="{{system.minimosCaracteristicas.res}}" data-dtype="Number" /></div>
+        <div class="form-group"><label>PER</label><input type="number" name="system.minimosCaracteristicas.per" value="{{system.minimosCaracteristicas.per}}" data-dtype="Number" /></div>
+        <div class="form-group"><label>COM</label><input type="number" name="system.minimosCaracteristicas.com" value="{{system.minimosCaracteristicas.com}}" data-dtype="Number" /></div>
+        <div class="form-group"><label>CUL</label><input type="number" name="system.minimosCaracteristicas.cul" value="{{system.minimosCaracteristicas.cul}}" data-dtype="Number" /></div>
+      </div>
+
+      <h3>Competencias Primarias (×3)</h3>
+      <div class="form-group"><textarea name="system.competenciasPrimarias">{{system.competenciasPrimarias}}</textarea></div>
+
+      <h3>Competencias Secundarias (×2)</h3>
+      <div class="form-group"><textarea name="system.competenciasSecundarias">{{system.competenciasSecundarias}}</textarea></div>
+
+      <h3>Equipo inicial</h3>
+      <div class="editor-container">
+        {{editor system.equipoInicial target="system.equipoInicial" button=true editable=editable}}
+      </div>
+    </div>
+    <div class="tab" data-group="primary" data-tab="descripcion">
+      {{> "systems/akers_aquelarre/templates/item/parts/item-descripcion.hbs"}}
+    </div>
+  </section>
+</form>

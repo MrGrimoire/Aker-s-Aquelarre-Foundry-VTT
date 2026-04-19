@@ -1,0 +1,57 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+  <header class="sheet-header flexrow">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" width="60" height="60" />
+    <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Nombre" /></h1>
+  </header>
+
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="datos">Datos</a>
+    <a class="item" data-tab="preparacion">Preparación</a>
+    <a class="item" data-tab="descripcion">Descripción</a>
+  </nav>
+
+  <section class="sheet-body">
+    <div class="tab" data-group="primary" data-tab="datos">
+      <div class="form-group"><label>Nombre Latín</label><input type="text" name="system.nombreLatin" value="{{system.nombreLatin}}" /></div>
+      <div class="form-group"><label>Origen</label><select name="system.origen">
+        {{#select system.origen}}
+        <option value="popular">Popular</option>
+        <option value="alquimico">Alquímico</option>
+        <option value="infernal">Infernal</option>
+        <option value="prohibido">Prohibido</option>
+        <option value="fe">Fe</option>
+        {{/select}}
+      </select></div>
+      <div class="form-group"><label>Vis</label><input type="number" name="system.vis" value="{{system.vis}}" min="1" max="7" data-dtype="Number" /></div>
+      <div class="form-group"><label>Coste PC</label><input type="number" name="system.costePC" value="{{system.costePC}}" data-dtype="Number" /></div>
+      <div class="form-group"><label>Forma</label><select name="system.forma">
+        {{#select system.forma}}
+        <option value="invocacion">Invocación</option>
+        <option value="maleficio">Maleficio</option>
+        <option value="pocion">Poción</option>
+        <option value="talisman">Talismán</option>
+        <option value="ungüento">Ungüento</option>
+        {{/select}}
+      </select></div>
+      <div class="form-group"><label>Naturaleza</label><select name="system.naturaleza">
+        {{#select system.naturaleza}}
+        <option value="blanca">Blanca</option>
+        <option value="negra">Negra</option>
+        {{/select}}
+      </select></div>
+      <div class="form-group"><label>Componentes</label><input type="text" name="system.componentes" value="{{system.componentes}}" /></div>
+      <div class="form-group"><label>Caducidad</label><input type="text" name="system.caducidad" value="{{system.caducidad}}" /></div>
+      <div class="form-group"><label>Duración</label><input type="text" name="system.duracion" value="{{system.duracion}}" /></div>
+      <div class="form-group"><label>Alcance</label><input type="text" name="system.alcance" value="{{system.alcance}}" /></div>
+      <div class="form-group"><label>Resistible</label><input type="checkbox" name="system.resistible" {{checked system.resistible}} /></div>
+    </div>
+    <div class="tab" data-group="primary" data-tab="preparacion">
+      <div class="editor-container">
+        {{editor system.preparacion target="system.preparacion" button=true editable=editable}}
+      </div>
+    </div>
+    <div class="tab" data-group="primary" data-tab="descripcion">
+      {{> "systems/akers_aquelarre/templates/item/parts/item-descripcion.hbs"}}
+    </div>
+  </section>
+</form>
