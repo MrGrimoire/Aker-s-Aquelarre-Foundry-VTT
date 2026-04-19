@@ -59,40 +59,79 @@ export class PersonajeSheet extends ActorSheet {
   }
 
   /* ---------------------------------------------------------------
-   *  _updateObject — intercepta cambios en RAC / IRR y operaciones de PV
+   *  _updateObject — intercepta cambios con operaciones +/-
    * --------------------------------------------------------------- */
   async _updateObject(event, formData) {
-    const pvKey = "system.derivados.pv.value";
-    const racKey = "system.derivados.racionalidad";
-    const irrKey = "system.derivados.irracionalidad";
-
-    // Procesar operaciones de PV (+/-) si existen
-    if (formData[pvKey] !== undefined) {
-      const pvInput = String(formData[pvKey]).trim();
+    // Función helper para procesar operaciones +/-
+    const procesarOperacion = (input, valorActual, min = -Infinity, max = Infinity) => {
+      const inputStr = String(input).trim();
+      let nuevoValor = null;
       
-      let nuevoValorPV = null;
-      
-      // Si empieza con + o -, es una operación
-      if (pvInput.startsWith("+") || pvInput.startsWith("-")) {
-        const operacion = parseFloat(pvInput);
+      if (inputStr.startsWith("+") || inputStr.startsWith("-")) {
+        const operacion = parseFloat(inputStr);
         if (!isNaN(operacion)) {
-          const pvActual = this.actor.system.derivados.pv.value;
-          nuevoValorPV = pvActual + operacion;
+          nuevoValor = valorActual + operacion;
         }
-      } else if (pvInput !== "") {
-        // Es un valor absoluto
-        const valor = parseInt(pvInput);
+      } else if (inputStr !== "") {
+        const valor = parseInt(inputStr);
         if (!isNaN(valor)) {
-          nuevoValorPV = valor;
+          nuevoValor = valor;
         }
       }
       
-      // Aplicar el nuevo valor de PV si se calculó
+      // Aplicar límites si se especifican
+      if (nuevoValor !== null) {
+        nuevoValor = Math.min(max, Math.max(min, nuevoValor));
+      }
+      return nuevoValor;
+    };
+
+    // 1. Procesar PV
+    const pvKey = "system.derivados.pv.value";
+    if (formData[pvKey] !== undefined) {
+      const nuevoValorPV = procesarOperacion(formData[pvKey], this.actor.system.derivados.pv.value);
       if (nuevoValorPV !== null) {
         formData[pvKey] = Number(nuevoValorPV);
       }
     }
 
+    // 2. Procesar RAC
+    const racKey = "system.derivados.racionalidad";
+    if (formData[racKey] !== undefined) {
+      const nuevoValorRAC = procesarOperacion(formData[racKey], this.actor.system.derivados.racionalidad, -100, 100);
+      if (nuevoValorRAC !== null) {
+        formData[racKey] = Number(nuevoValorRAC);
+      }
+    }
+
+    // 3. Procesar IRR
+    const irrKey = "system.derivados.irracionalidad";
+    if (formData[irrKey] !== undefined) {
+      const nuevoValorIRR = procesarOperacion(formData[irrKey], this.actor.system.derivados.irracionalidad, 0, 200);
+      if (nuevoValorIRR !== null) {
+        formData[irrKey] = Number(nuevoValorIRR);
+      }
+    }
+
+    // 4. Procesar PF
+    const pfKey = "system.derivados.pf.value";
+    if (formData[pfKey] !== undefined) {
+      const nuevoValorPF = procesarOperacion(formData[pfKey], this.actor.system.derivados.pf.value, 0);
+      if (nuevoValorPF !== null) {
+        formData[pfKey] = Number(nuevoValorPF);
+      }
+    }
+
+    // 5. Procesar PC
+    const pcKey = "system.derivados.pc.value";
+    if (formData[pcKey] !== undefined) {
+      const nuevoValorPC = procesarOperacion(formData[pcKey], this.actor.system.derivados.pc.value, 0);
+      if (nuevoValorPC !== null) {
+        formData[pcKey] = Number(nuevoValorPC);
+      }
+    }
+
+    // 6. Lógica de sincronización RAC/IRR (mantiene la relación inversa)
     const racViejo = this.actor.system.derivados.racionalidad;
     const irrViejo = this.actor.system.derivados.irracionalidad;
 
