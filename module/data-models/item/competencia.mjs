@@ -13,7 +13,7 @@ export class CompetenciaDataModel extends foundry.abstract.TypeDataModel {
       caracteristica: new StringField({ initial: "" }),      // fue, agi, hab, res, per, com, cul
       tipo: new StringField({ initial: "normal" }),          // normal, paterna, primaria2, primaria3, secundaria
       bonus: new NumberField({ required: true, integer: true, min: 0, initial: 0 }),
-      tipoArma: new StringField({ initial: "" }),            // para competencias de combate
+      seccion: new StringField({ initial: "general" }),       // "general" o "arma" - determina la sección
       exitoReciente: new BooleanField({ initial: false }),   // marcado cuando se obtiene éxito/crítico en tirada
       descripcion: new HTMLField({ required: true, blank: true }),
     };

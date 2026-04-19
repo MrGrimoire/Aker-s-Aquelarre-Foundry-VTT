@@ -428,7 +428,7 @@ export class AquelarreActor extends Actor {
           caracteristica: c.caracteristica,
           tipo: "normal",
           bonus: 0,
-          tipoArma: c.tipoArma || "",
+          seccion: c.tipoArma ? "arma" : "general",
         },
       }));
 

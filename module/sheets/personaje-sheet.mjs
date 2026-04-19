@@ -51,9 +51,9 @@ export class PersonajeSheet extends ActorSheet {
       })
       .sort((a, b) => a.name.localeCompare(b.name));
 
-    // Separar competencias de armas
-    context.competencias = todasCompetencias.filter(c => !c.system.tipoArma);
-    context.competenciasArmas = todasCompetencias.filter(c => c.system.tipoArma);
+    // Separar competencias por sección
+    context.competencias = todasCompetencias.filter(c => c.system.seccion === "general");
+    context.competenciasArmas = todasCompetencias.filter(c => c.system.seccion === "arma");
 
     return context;
   }
@@ -323,6 +323,13 @@ export class PersonajeSheet extends ActorSheet {
               <label>Tipo</label>
               <select name="tipo">${tipoOpts}</select>
             </div>
+            <div class="form-group">
+              <label>Sección</label>
+              <select name="seccion">
+                <option value="general">Competencias Generales</option>
+                <option value="arma">Competencias de Armas</option>
+              </select>
+            </div>
           </form>`,
         buttons: {
           crear: {
@@ -332,6 +339,7 @@ export class PersonajeSheet extends ActorSheet {
               nombre: html.find('[name="nombre"]').val()?.trim() || "Nueva Competencia",
               car: html.find('[name="car"]').val(),
               tipo: html.find('[name="tipo"]').val() || "normal",
+              seccion: html.find('[name="seccion"]').val() || "general",
             }),
           },
           cancelar: {
@@ -354,6 +362,7 @@ export class PersonajeSheet extends ActorSheet {
         caracteristica: resultado.car,
         tipo: resultado.tipo,
         bonus: 0,
+        seccion: resultado.seccion,
       },
     }]);
   }
