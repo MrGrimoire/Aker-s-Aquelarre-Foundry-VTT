@@ -191,6 +191,32 @@ export class PersonajeSheet extends ActorSheet {
       });
     });
 
+    // Toggle colapso de secciones de competencias
+    html.find(".comp-section-title").click((ev) => {
+      const section = ev.currentTarget.closest(".collapsible-section");
+      if (section) {
+        section.classList.toggle("collapsed");
+        // Guardar estado en localStorage
+        const sectionName = section.dataset.section;
+        const isCollapsed = section.classList.contains("collapsed");
+        const key = `competencias-section-${this.actor.id}-${sectionName}`;
+        if (isCollapsed) {
+          localStorage.setItem(key, "true");
+        } else {
+          localStorage.removeItem(key);
+        }
+      }
+    });
+
+    // Restaurar estado colapsado de secciones
+    html.find(".collapsible-section").each((_, section) => {
+      const sectionName = section.dataset.section;
+      const key = `competencias-section-${this.actor.id}-${sectionName}`;
+      if (localStorage.getItem(key) === "true") {
+        section.classList.add("collapsed");
+      }
+    });
+
     // Toggle checkbox éxito reciente
     html.find(".comp-exito-check").change(async (ev) => {
       const itemId = ev.currentTarget.closest(".item").dataset.itemId;

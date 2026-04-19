@@ -308,15 +308,48 @@
   font-weight: bold;
 }
 
+.aquelarre .collapsible-section {
+  margin-top: 12px;
+}
+
 .aquelarre .comp-section-title {
   font-family: var(--aq-font-heading);
   font-weight: bold;
   color: var(--aq-color-accent);
-  margin-top: 12px;
-  margin-bottom: 6px;
+  margin: 0;
+  padding: 6px 8px;
   border-bottom: 2px solid var(--aq-color-accent);
-  padding-bottom: 4px;
   font-size: 0.95em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
+}
+
+.aquelarre .comp-section-title:hover {
+  background: rgba(139, 125, 107, 0.1);
+}
+
+.aquelarre .section-toggle {
+  font-size: 0.8em;
+  transition: transform 0.3s ease;
+}
+
+.aquelarre .collapsible-section.collapsed .section-toggle {
+  transform: rotate(-90deg);
+}
+
+.aquelarre .section-content {
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  max-height: 1000px;
+  opacity: 1;
+  overflow: hidden;
+}
+
+.aquelarre .collapsible-section.collapsed .section-content {
+  max-height: 0;
+  opacity: 0;
 }
 
 .aquelarre .herida {
