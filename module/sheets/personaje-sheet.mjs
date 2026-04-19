@@ -131,7 +131,16 @@ export class PersonajeSheet extends ActorSheet {
       }
     }
 
-    // 6. Lógica de sincronización RAC/IRR (mantiene la relación inversa)
+    // 6. Procesar Puntos de Aprendizaje (solo números positivos)
+    const paKey = "system.trasfondo.puntosAprendizaje";
+    if (formData[paKey] !== undefined) {
+      const nuevoValorPA = procesarOperacion(formData[paKey], this.actor.system.trasfondo.puntosAprendizaje, 0);
+      if (nuevoValorPA !== null) {
+        formData[paKey] = Number(nuevoValorPA);
+      }
+    }
+
+    // 7. Lógica de sincronización RAC/IRR (mantiene la relación inversa)
     const racViejo = this.actor.system.derivados.racionalidad;
     const irrViejo = this.actor.system.derivados.irracionalidad;
 
@@ -275,6 +284,14 @@ export class PersonajeSheet extends ActorSheet {
     // Seleccionar todo al hacer focus en el campo de PV
     html.find('input[name="system.derivados.pv.value"]').on("focus", function(e) {
       e.target.select();
+    });
+
+    // Validar Puntos de Aprendizaje: rechazar negativos en tiempo real
+    html.find('input[name="system.trasfondo.puntosAprendizaje"]').on("change", (ev) => {
+      const val = parseInt(ev.target.value) || 0;
+      if (val < 0) {
+        ev.target.value = 0;
+      }
     });
   }
 
