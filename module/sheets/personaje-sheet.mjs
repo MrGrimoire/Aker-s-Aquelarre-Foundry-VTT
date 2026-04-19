@@ -30,7 +30,7 @@ export class PersonajeSheet extends ActorSheet {
     context.rasgos = this.actor.items.filter(i => i.type === "rasgo");
 
     // Competencias con valor total computado
-    context.competencias = this.actor.items.filter(i => i.type === "competencia")
+    const todasCompetencias = this.actor.items.filter(i => i.type === "competencia")
       .map(item => {
         const data = item.toObject(false);
         let carTotal = 0;
@@ -49,6 +49,10 @@ export class PersonajeSheet extends ActorSheet {
         return data;
       })
       .sort((a, b) => a.name.localeCompare(b.name));
+
+    // Separar competencias de armas
+    context.competencias = todasCompetencias.filter(c => !c.system.tipoArma);
+    context.competenciasArmas = todasCompetencias.filter(c => c.system.tipoArma);
 
     return context;
   }

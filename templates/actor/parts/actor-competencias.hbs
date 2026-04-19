@@ -15,7 +15,7 @@
     </a>
   </div>
 
-  {{!-- Lista --}}
+  {{!-- Competencias Normales --}}
   <ol class="items-list competencias-list">
     <li class="items-header flexrow">
       <span class="comp-check-col">✓</span>
@@ -54,4 +54,47 @@
     </li>
     {{/each}}
   </ol>
+
+  {{!-- Competencias de Armas --}}
+  {{#if competenciasArmas.length}}
+  <h3 class="comp-section-title">Competencias de Armas</h3>
+  <ol class="items-list competencias-list">
+    <li class="items-header flexrow">
+      <span class="comp-check-col">✓</span>
+      <span class="comp-name">Competencia</span>
+      <span class="comp-car-col">Car.</span>
+      <span class="comp-tipo-col">Tipo</span>
+      <span class="comp-total-col">Total</span>
+      <span class="item-controls"></span>
+    </li>
+
+    {{#each competenciasArmas as |comp|}}
+    <li class="item flexrow" data-item-id="{{comp._id}}">
+      <span class="comp-check-col">
+        <input type="checkbox" class="comp-exito-check" {{#if comp.system.exitoReciente}}checked{{/if}} title="Éxito reciente" />
+      </span>
+      <span class="comp-name rollable-comp" title="Tirada de {{comp.name}}">
+        {{comp.name}}
+      </span>
+      <span class="comp-car-col">{{comp.carAbr}}</span>
+      <span class="comp-tipo-col">
+        <select class="comp-tipo-select">
+          {{#select comp.system.tipo}}
+          <option value="normal">Normal</option>
+          <option value="paterna">Paterna</option>
+          <option value="primaria2">1ª ×2</option>
+          <option value="primaria3">1ª ×3</option>
+          <option value="secundaria">2ª</option>
+          {{/select}}
+        </select>
+      </span>
+      <span class="comp-total-col">{{comp.valorTotal}}%</span>
+      <span class="item-controls">
+        <a class="item-edit" title="Editar"><i class="fas fa-edit"></i></a>
+        <a class="item-delete" title="Borrar"><i class="fas fa-trash"></i></a>
+      </span>
+    </li>
+    {{/each}}
+  </ol>
+  {{/if}}
 </div>

@@ -308,6 +308,17 @@
   font-weight: bold;
 }
 
+.aquelarre .comp-section-title {
+  font-family: var(--aq-font-heading);
+  font-weight: bold;
+  color: var(--aq-color-accent);
+  margin-top: 12px;
+  margin-bottom: 6px;
+  border-bottom: 2px solid var(--aq-color-accent);
+  padding-bottom: 4px;
+  font-size: 0.95em;
+}
+
 .aquelarre .herida {
   text-align: center;
 }
