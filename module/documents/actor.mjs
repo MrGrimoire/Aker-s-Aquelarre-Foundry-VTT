@@ -13,10 +13,19 @@ export class AquelarreActor extends Actor {
    *  HELPER — Evaluar resultado de 1d100 según reglas Aquelarre
    *  Crítico ≤ ceil(obj/10)  |  Pifia ≥ 90+ceil(obj/10)
    *  1–5 siempre éxito  |  96–100 siempre fallo
+   *  EXCEPCIONES: 1 siempre crítico | 100 siempre pifia
    * ---------------------------------------------------------------- */
   _evaluarTirada(tirada, objetivo) {
     const critUmbral = Math.ceil(objetivo / 10);
     const pifiaUmbral = 90 + critUmbral;
+
+    // Excepciones especiales: 1 siempre es crítico, 100 siempre es pifia
+    if (tirada === 1) {
+      return { exito: true, critico: true, pifia: false, critUmbral, pifiaUmbral };
+    }
+    if (tirada === 100) {
+      return { exito: false, critico: false, pifia: true, critUmbral, pifiaUmbral };
+    }
 
     const pifia = tirada >= pifiaUmbral;
     const critico = !pifia && tirada <= critUmbral;
