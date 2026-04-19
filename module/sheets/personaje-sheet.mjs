@@ -21,6 +21,7 @@ export class PersonajeSheet extends ActorSheet {
     context.flags = this.actor.flags;
     context.config = CONFIG.AQUELARRE;
     context.condicion = this.actor.getCondicion();
+    context.isGM = game.user.isGM;
 
     // Preparar items por tipo
     context.armas = this.actor.items.filter(i => i.type === "arma");

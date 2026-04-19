@@ -42,6 +42,7 @@ export class PersonajeDataModel extends foundry.abstract.TypeDataModel {
         religion: new StringField({ initial: "" }),
         claseSocial: new StringField({ initial: "" }),
         profesion: new StringField({ initial: "" }),
+        puntosAprendizaje: new NumberField({ required: true, integer: true, min: 0, initial: 0 }),
         edad: new NumberField({ required: true, integer: true, min: 0, initial: 20 }),
         sexo: new StringField({ initial: "" }),
         pueblo: new StringField({ initial: "" }),
