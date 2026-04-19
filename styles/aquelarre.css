@@ -342,14 +342,15 @@
 
 .aquelarre .section-content {
   transition: max-height 0.3s ease, opacity 0.3s ease;
-  max-height: 1000px;
+  max-height: 2000px;
   opacity: 1;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .aquelarre .collapsible-section.collapsed .section-content {
   max-height: 0;
   opacity: 0;
+  overflow: hidden;
 }
 
 .aquelarre .herida {
