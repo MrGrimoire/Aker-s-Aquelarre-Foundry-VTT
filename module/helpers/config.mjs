@@ -102,6 +102,14 @@ AQUELARRE.localizaciones = {
 };
 
 /**
+ * Tipos de hechizo.
+ */
+AQUELARRE.tiposHechizo = {
+  conjuro: "Conjuro",
+  milagro: "Milagro",
+};
+
+/**
  * Tradiciones mágicas (orígenes).
  */
 AQUELARRE.origenesMagia = {
@@ -113,14 +121,14 @@ AQUELARRE.origenesMagia = {
 };
 
 /**
- * Formas mágicas.
+ * Formas mágicas / Ceremonia.
  */
 AQUELARRE.formasMagia = {
   invocacion: "Invocación",
   maleficio: "Maleficio",
   pocion: "Poción",
   talisman: "Talismán",
-  ungüento: "Ungüento"
+  unguento: "Ungüento",
 };
 
 /**
@@ -128,7 +136,30 @@ AQUELARRE.formasMagia = {
  */
 AQUELARRE.naturalezaMagia = {
   blanca: "Blanca",
-  negra: "Negra"
+  negra: "Negra",
+};
+
+/**
+ * Procedencia de componentes mágicos.
+ */
+AQUELARRE.procedenciasComponente = {
+  vegetal: "Vegetal",
+  mineral: "Mineral",
+  animal: "Animal",
+  humano: "Humano",
+  irracional: "Irracional",
+};
+
+/**
+ * Potencial mágico de componentes.
+ * Tipo 1: escaso potencial, uso común.
+ * Tipo 2: gran potencial O difícil de conseguir.
+ * Tipo 3: gran potencial Y difícil de conseguir.
+ */
+AQUELARRE.tiposComponente = {
+  tipo1: "Tipo 1 — Común",
+  tipo2: "Tipo 2 — Potente o raro",
+  tipo3: "Tipo 3 — Potente y raro",
 };
 
 /**

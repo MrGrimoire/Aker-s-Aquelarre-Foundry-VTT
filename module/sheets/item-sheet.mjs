@@ -26,6 +26,24 @@ export class AquelarreItemSheet extends ItemSheet {
     context.system = itemData.system;
     context.flags = itemData.flags;
     context.config = CONFIG.AQUELARRE;
+
+    // Para hechizos: inyectar la lista de componentes del actor y los asignados
+    if (this.item.type === "hechizo") {
+      const actor = this.item.actor;
+      if (actor) {
+        context.actorComponentes = actor.items
+          .filter(i => i.type === "componente")
+          .map(c => c.toObject(false));
+        context.componentesData = (this.item.system.componenteIds ?? [])
+          .map(id => actor.items.get(id))
+          .filter(Boolean)
+          .map(c => c.toObject(false));
+      } else {
+        context.actorComponentes = [];
+        context.componentesData = [];
+      }
+    }
+
     return context;
   }
 
@@ -33,5 +51,22 @@ export class AquelarreItemSheet extends ItemSheet {
   activateListeners(html) {
     super.activateListeners(html);
     if (!this.isEditable) return;
+
+    // ── Hechizo: quitar componente desde la pestaña ─────────────
+    html.find(".hechizo-remove-comp").click(async ev => {
+      const compId = ev.currentTarget.dataset.compId;
+      const current = this.item.system.componenteIds ?? [];
+      await this.item.update({ "system.componenteIds": current.filter(id => id !== compId) });
+    });
+
+    // ── Hechizo: añadir componente desde el select ───────────────
+    html.find(".hechizo-add-comp-btn").click(async () => {
+      const compId = html.find("#hechizo-add-comp-select").val();
+      if (!compId) return;
+      const current = this.item.system.componenteIds ?? [];
+      if (!current.includes(compId)) {
+        await this.item.update({ "system.componenteIds": [...current, compId] });
+      }
+    });
   }
 }

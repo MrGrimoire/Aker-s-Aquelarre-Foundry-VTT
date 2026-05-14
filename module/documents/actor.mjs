@@ -440,4 +440,91 @@ export class AquelarreActor extends Actor {
     await this.createEmbeddedDocuments("Item", nuevas);
     ui.notifications.info(`Se crearon ${nuevas.length} competencias.`);
   }
+
+  /* ----------------------------------------------------------------
+   *  Descanso — recupera PC y PF según horas dormidas
+   *  Regla: +10% del máximo por hora (redondeado hacia abajo)
+   * ---------------------------------------------------------------- */
+  async descanso() {
+    const derivados = this.system.derivados;
+    const pcActual = derivados?.pc?.value ?? 0;
+    const pcMax    = derivados?.pc?.max   ?? 0;
+    const pfActual = derivados?.pf?.value ?? 0;
+    const pfMax    = derivados?.pf?.max   ?? 0;
+
+    const horas = await new Promise((resolve) => {
+      new Dialog({
+        title: `Descanso — ${this.name}`,
+        content: `
+          <form>
+            <p style="margin:0 0 8px 0;font-size:0.9em;color:#555;">
+              Cada hora de sueño recupera el <strong>10%</strong> del máximo de PC y PF.
+            </p>
+            <div class="form-group">
+              <label>Horas dormidas</label>
+              <input type="number" name="horas" value="8" min="1" max="24" step="1" autofocus />
+            </div>
+            <p style="margin:6px 0 0 0;font-size:0.85em;color:#666;">
+              PC: ${pcActual} / ${pcMax} &nbsp;|&nbsp; PF: ${pfActual} / ${pfMax}
+            </p>
+          </form>`,
+        buttons: {
+          descansar: {
+            icon: '<i class="fas fa-bed"></i>',
+            label: "Descansar",
+            callback: (html) => resolve(parseInt(html.find("[name=horas]").val()) || 0),
+          },
+          cancel: {
+            icon: '<i class="fas fa-times"></i>',
+            label: "Cancelar",
+            callback: () => resolve(null),
+          },
+        },
+        default: "descansar",
+        close: () => resolve(null),
+      }).render(true);
+    });
+
+    if (!horas || horas <= 0) return;
+
+    // Calcular recuperación: 10% del máximo por hora
+    const recPC = Math.floor(pcMax * 0.1) * horas;
+    const recPF = Math.floor(pfMax * 0.1) * horas;
+
+    const nuevoPc = Math.min(pcMax, pcActual + recPC);
+    const nuevoPf = Math.min(pfMax, pfActual + recPF);
+
+    await this.update({
+      "system.derivados.pc.value": nuevoPc,
+      "system.derivados.pf.value": nuevoPf,
+    });
+
+    // Mensaje al chat
+    const ganPC = nuevoPc - pcActual;
+    const ganPF = nuevoPf - pfActual;
+    const filas = [];
+    if (pcMax > 0) filas.push(`<tr><td>PC</td><td>${pcActual} → <strong>${nuevoPc}</strong> / ${pcMax}</td><td style="color:#080">+${ganPC}</td></tr>`);
+    if (pfMax > 0) filas.push(`<tr><td>PF</td><td>${pfActual} → <strong>${nuevoPf}</strong> / ${pfMax}</td><td style="color:#080">+${ganPF}</td></tr>`);
+
+    ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor: this }),
+      content: `
+        <div class="aquelarre-roll">
+          <strong><i class="fas fa-bed"></i> ${this.name} descansa ${horas}h</strong>
+          <table style="width:100%;margin-top:6px;font-size:0.9em;border-collapse:collapse;">
+            <thead><tr style="border-bottom:1px solid #ccc;">
+              <th style="text-align:left">Recurso</th>
+              <th style="text-align:left">Valores</th>
+              <th style="text-align:left">Ganado</th>
+            </tr></thead>
+            <tbody>${filas.join("")}</tbody>
+          </table>
+          <p style="margin:6px 0 0 0;font-size:0.8em;color:#666;">
+            Recuperación: ${Math.floor(pcMax * 0.1)} PC/h · ${Math.floor(pfMax * 0.1)} PF/h
+          </p>
+        </div>`,
+    });
+
+    ui.notifications?.info(`${this.name} descansa ${horas}h → +${ganPC} PC, +${ganPF} PF.`);
+  }
 }

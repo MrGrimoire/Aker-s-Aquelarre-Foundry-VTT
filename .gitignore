@@ -1,0 +1,27 @@
+# Dependencias
+node_modules/
+
+# Material fuente con copyright (no redistribuir)
+*.pdf
+
+# Artefactos intermedios del build de packs
+_parsed.json
+_inspect.py
+
+# Logs y temporales
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# Lock files de LevelDB (los crea Foundry al abrir; no deben subirse)
+packs/**/LOCK
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Entorno local
+.env
+.env.local

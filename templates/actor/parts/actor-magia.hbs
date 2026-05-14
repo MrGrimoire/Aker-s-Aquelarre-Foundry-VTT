@@ -1,20 +1,121 @@
-{{!-- Partial: Lista de hechizos --}}
+{{!-- ============================================================
+     Pestaña de Magia: conjuros conocidos + inventario de componentes
+     ============================================================ --}}
+
+{{!-- ── CONJUROS CONOCIDOS ─────────────────────────────────────── --}}
+<div class="magia-section-header flexrow">
+  <h3 class="magia-section-title"><i class="fas fa-magic"></i> Conjuros Conocidos</h3>
+  {{#if editable}}
+  <a class="add-hechizo magia-add-btn" title="Añadir hechizo"><i class="fas fa-plus"></i></a>
+  {{/if}}
+</div>
+
 <ol class="items-list hechizos-list">
   <li class="items-header flexrow">
-    <span class="item-name">{{localize "AQUELARRE.Hechizo"}}</span>
-    <span class="item-detail">Tradición</span>
-    <span class="item-detail">Nivel</span>
-    <span class="item-detail">IRR</span>
+    <span class="item-name">Nombre</span>
+    <span class="item-detail magia-col-tipo">Tipo</span>
+    <span class="item-detail magia-col-nivel">Niv.</span>
+    <span class="item-detail magia-col-forma">Ceremonia</span>
+    <span class="item-detail magia-col-exp">Expiración</span>
+    <span class="item-detail magia-col-dur">Duración</span>
     <span class="item-controls"></span>
   </li>
+
   {{#each hechizos as |h|}}
-  <li class="item flexrow" data-item-id="{{h._id}}">
-    <span class="item-name">{{h.name}}</span>
-    <span class="item-detail">{{h.system.tradicion}}</span>
-    <span class="item-detail">{{h.system.nivel}}</span>
-    <span class="item-detail">{{h.system.costeIrr}}</span>
+  <li class="item hechizo-item flexcol" data-item-id="{{h._id}}">
+
+    {{!-- Fila principal del hechizo --}}
+    <div class="hechizo-main-row flexrow">
+      <span class="item-name rollable item-roll" data-item-id="{{h._id}}" title="Lanzar hechizo">
+        <span class="naturaleza-dot nat-{{h.system.naturaleza}}" title="Magia {{h.system.naturaleza}}"></span>
+        {{h.name}}
+      </span>
+      <span class="item-detail magia-col-tipo">
+        <span class="tipo-badge tipo-{{h.system.tipo}}">
+          {{#ifEquals h.system.tipo "milagro"}}Milagro{{else}}Conjuro{{/ifEquals}}
+        </span>
+      </span>
+      <span class="item-detail magia-col-nivel">
+        <span class="vis-badge">
+          {{#ifEquals h.system.tipo "milagro"}}O{{else}}V{{/ifEquals}}{{h.system.vis}}
+        </span>
+      </span>
+      <span class="item-detail magia-col-forma">{{h.system.forma}}</span>
+      <span class="item-detail magia-col-exp">{{h.system.expiracion}}</span>
+      <span class="item-detail magia-col-dur">{{h.system.duracion}}</span>
+      <span class="item-controls">
+        <a class="item-edit" title="Editar"><i class="fas fa-edit"></i></a>
+        <a class="item-delete" title="Borrar"><i class="fas fa-trash"></i></a>
+      </span>
+    </div>
+
+    {{!-- Tira de componentes (siempre visible, tags colapsables al click) --}}
+    <div class="hechizo-componentes-strip">
+      {{#each h.componentesData as |comp|}}
+      <div class="comp-tag-wrapper proc-{{comp.system.procedencia}} niv-{{comp.system.tipoComponente}}"
+           data-comp-id="{{comp._id}}">
+        <span class="comp-tag" title="Click para ver detalles">
+          <i class="fas fa-mortar-pestle"></i>
+          <span class="comp-tag-name">{{comp.name}}</span>
+          {{#if ../../editable}}
+          <i class="fas fa-times remove-comp" title="Quitar de este hechizo"></i>
+          {{/if}}
+        </span>
+        <div class="comp-tag-panel">
+          <div class="comp-panel-cols">
+            <span><b>Procedencia:</b> {{comp.system.procedencia}}</span>
+            <span><b>Tipo:</b> {{comp.system.tipoComponente}}</span>
+            <span><b>Naturaleza:</b> {{comp.system.naturaleza}}</span>
+            <span><b>Origen:</b> {{comp.system.origen}}</span>
+          </div>
+          {{#if comp.system.efecto}}
+          <div class="comp-panel-efecto"><b>Efecto:</b> {{comp.system.efecto}}</div>
+          {{/if}}
+        </div>
+      </div>
+      {{/each}}
+
+      {{#if editable}}
+      <a class="add-comp-to-hechizo comp-add-btn" title="Asignar componente a este hechizo">
+        <i class="fas fa-plus-circle"></i> comp.
+      </a>
+      {{/if}}
+    </div>
+
+  </li>
+  {{/each}}
+</ol>
+
+{{!-- ── COMPONENTES MÁGICOS ──────────────────────────────────────── --}}
+<div class="magia-section-header flexrow" style="margin-top:14px">
+  <h3 class="magia-section-title"><i class="fas fa-mortar-pestle"></i> Componentes Mágicos</h3>
+  {{#if editable}}
+  <a class="add-componente magia-add-btn" title="Añadir componente"><i class="fas fa-plus"></i></a>
+  {{/if}}
+</div>
+
+<ol class="items-list componentes-list">
+  <li class="items-header flexrow">
+    <span class="item-name">Nombre</span>
+    <span class="item-detail magia-col-proc">Procedencia</span>
+    <span class="item-detail magia-col-tipo">Tipo</span>
+    <span class="item-detail magia-col-nat">Naturaleza</span>
+    <span class="item-detail magia-col-orig">Origen</span>
+    <span class="item-controls"></span>
+  </li>
+
+  {{#each componentes as |c|}}
+  <li class="item flexrow" data-item-id="{{c._id}}">
+    <span class="item-name">{{c.name}}</span>
+    <span class="item-detail magia-col-proc">
+      <span class="proc-badge proc-{{c.system.procedencia}}">{{c.system.procedencia}}</span>
+    </span>
+    <span class="item-detail magia-col-tipo">
+      <span class="comp-tipo-badge niv-{{c.system.tipoComponente}}">{{c.system.tipoComponente}}</span>
+    </span>
+    <span class="item-detail magia-col-nat">{{c.system.naturaleza}}</span>
+    <span class="item-detail magia-col-orig">{{c.system.origen}}</span>
     <span class="item-controls">
-      <a class="item-roll" title="Lanzar"><i class="fas fa-magic"></i></a>
       <a class="item-edit" title="Editar"><i class="fas fa-edit"></i></a>
       <a class="item-delete" title="Borrar"><i class="fas fa-trash"></i></a>
     </span>

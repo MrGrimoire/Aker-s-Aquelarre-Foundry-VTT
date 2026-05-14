@@ -13,6 +13,8 @@
   "AQUELARRE.Armas": "Armas",
   "AQUELARRE.Armaduras": "Armaduras",
   "AQUELARRE.Hechizo": "Hechizo",
+  "AQUELARRE.Hechizo.componentesRequeridos": "Componentes requeridos",
+  "AQUELARRE.Hechizo.componentesNombres": "Componentes del compendio",
   "AQUELARRE.Competencia": "Competencia",
 
   "AQUELARRE.Caracteristica.label": "Característica",
@@ -111,8 +113,22 @@
   "AQUELARRE.ItemType.arma": "Arma",
   "AQUELARRE.ItemType.armadura": "Armadura",
   "AQUELARRE.ItemType.competencia": "Competencia",
+  "AQUELARRE.ItemType.componente": "Componente Mágico",
   "AQUELARRE.ItemType.hechizo": "Hechizo",
   "AQUELARRE.ItemType.profesion": "Profesión",
   "AQUELARRE.ItemType.equipo": "Equipo",
-  "AQUELARRE.ItemType.rasgo": "Rasgo"
+  "AQUELARRE.ItemType.rasgo": "Rasgo",
+
+  "AQUELARRE.TipoHechizo.conjuro": "Conjuro",
+  "AQUELARRE.TipoHechizo.milagro": "Milagro",
+
+  "AQUELARRE.ProcedenciaComp.vegetal": "Vegetal",
+  "AQUELARRE.ProcedenciaComp.mineral": "Mineral",
+  "AQUELARRE.ProcedenciaComp.animal": "Animal",
+  "AQUELARRE.ProcedenciaComp.humano": "Humano",
+  "AQUELARRE.ProcedenciaComp.irracional": "Irracional",
+
+  "AQUELARRE.TipoComp.tipo1": "Tipo 1 — Común",
+  "AQUELARRE.TipoComp.tipo2": "Tipo 2 — Potente o raro",
+  "AQUELARRE.TipoComp.tipo3": "Tipo 3 — Potente y raro"
 }
