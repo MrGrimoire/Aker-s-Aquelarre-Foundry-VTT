@@ -16,6 +16,7 @@ import { CriaturaDataModel } from "./module/data-models/actor/criatura.mjs";
 import { ArmaDataModel } from "./module/data-models/item/arma.mjs";
 import { ArmaduraDataModel } from "./module/data-models/item/armadura.mjs";
 import { CompetenciaDataModel } from "./module/data-models/item/competencia.mjs";
+import { ComponenteDataModel } from "./module/data-models/item/componente.mjs";
 import { HechizoDataModel } from "./module/data-models/item/hechizo.mjs";
 import { ProfesionDataModel } from "./module/data-models/item/profesion.mjs";
 import { EquipoDataModel } from "./module/data-models/item/equipo.mjs";
@@ -52,6 +53,7 @@ Hooks.once("init", function () {
   CONFIG.Item.dataModels.arma = ArmaDataModel;
   CONFIG.Item.dataModels.armadura = ArmaduraDataModel;
   CONFIG.Item.dataModels.competencia = CompetenciaDataModel;
+  CONFIG.Item.dataModels.componente = ComponenteDataModel;
   CONFIG.Item.dataModels.hechizo = HechizoDataModel;
   CONFIG.Item.dataModels.profesion = ProfesionDataModel;
   CONFIG.Item.dataModels.equipo = EquipoDataModel;

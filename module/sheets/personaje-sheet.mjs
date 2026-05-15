@@ -26,9 +26,25 @@ export class PersonajeSheet extends ActorSheet {
     // Preparar items por tipo
     context.armas = this.actor.items.filter(i => i.type === "arma");
     context.armaduras = this.actor.items.filter(i => i.type === "armadura");
-    context.hechizos = this.actor.items.filter(i => i.type === "hechizo");
     context.equipo = this.actor.items.filter(i => i.type === "equipo");
     context.rasgos = this.actor.items.filter(i => i.type === "rasgo");
+
+    // Hechizos: cada uno lleva su lista de componentes ya resuelta
+    context.hechizos = this.actor.items
+      .filter(i => i.type === "hechizo")
+      .map(h => {
+        const data = h.toObject(false);
+        data.componentesData = (h.system.componenteIds ?? [])
+          .map(id => this.actor.items.get(id))
+          .filter(Boolean)
+          .map(c => c.toObject(false));
+        return data;
+      });
+
+    // Componentes: inventario completo del personaje
+    context.componentes = this.actor.items
+      .filter(i => i.type === "componente")
+      .map(c => c.toObject(false));
 
     // Competencias con valor total computado
     const todasCompetencias = this.actor.items.filter(i => i.type === "competencia")
@@ -292,6 +308,80 @@ export class PersonajeSheet extends ActorSheet {
       if (val < 0) {
         ev.target.value = 0;
       }
+    });
+
+    // ── Pestaña de Magia ──────────────────────────────────────────
+
+    // Añadir hechizo
+    html.find(".add-hechizo").click(async () => {
+      await Item.create({ name: "Nuevo Hechizo", type: "hechizo" }, { parent: this.actor });
+    });
+
+    // Añadir componente
+    html.find(".add-componente").click(async () => {
+      await Item.create({ name: "Nuevo Componente", type: "componente" }, { parent: this.actor });
+    });
+
+    // Descanso — recuperar PC y PF según horas dormidas
+    html.find(".btn-descanso").click(() => this.actor.descanso());
+
+    // Desplegar/colapsar detalles de un componente al hacer click en el tag
+    html.find(".comp-tag").click(ev => {
+      const wrapper = ev.currentTarget.closest(".comp-tag-wrapper");
+      if (!wrapper) return;
+      const panel = wrapper.querySelector(".comp-tag-panel");
+      if (panel) $(panel).slideToggle(150);
+      wrapper.classList.toggle("expanded");
+    });
+
+    // Quitar componente de un hechizo (× en el tag)
+    html.find(".remove-comp").click(async ev => {
+      ev.stopPropagation();
+      const wrapper = ev.currentTarget.closest(".comp-tag-wrapper");
+      const compId = wrapper?.dataset.compId;
+      const hechizoId = ev.currentTarget.closest(".hechizo-item")?.dataset.itemId;
+      if (!compId || !hechizoId) return;
+      const hechizo = this.actor.items.get(hechizoId);
+      const current = hechizo?.system.componenteIds ?? [];
+      await hechizo?.update({ "system.componenteIds": current.filter(id => id !== compId) });
+    });
+
+    // Asignar componente a un hechizo desde el "+" del strip
+    html.find(".add-comp-to-hechizo").click(async ev => {
+      const hechizoId = ev.currentTarget.closest(".hechizo-item")?.dataset.itemId;
+      const hechizo = this.actor.items.get(hechizoId);
+      if (!hechizo) return;
+
+      const current = hechizo.system.componenteIds ?? [];
+      const disponibles = this.actor.items
+        .filter(i => i.type === "componente" && !current.includes(i.id));
+
+      if (!disponibles.length) {
+        ui.notifications.warn("No hay componentes disponibles para asignar. Añade primero componentes al personaje.");
+        return;
+      }
+
+      const options = disponibles
+        .map(c => `<option value="${c.id}">${c.name}</option>`)
+        .join("");
+
+      new Dialog({
+        title: "Asignar Componente al Hechizo",
+        content: `<div class="form-group"><label>Componente:</label>
+          <select name="compId">${options}</select></div>`,
+        buttons: {
+          add: {
+            icon: '<i class="fas fa-link"></i>',
+            label: "Asignar",
+            callback: async dialogHtml => {
+              const compId = dialogHtml.find("[name=compId]").val();
+              if (compId) await hechizo.update({ "system.componenteIds": [...current, compId] });
+            },
+          },
+          cancel: { icon: '<i class="fas fa-times"></i>', label: "Cancelar" },
+        },
+        default: "add",
+      }).render(true);
     });
   }
 

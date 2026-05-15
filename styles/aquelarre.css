@@ -114,6 +114,37 @@
   width: 100%;
 }
 
+/* ---------- Barra de acciones (descanso, etc.) ---------- */
+.aquelarre .sheet-actions {
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 2px 4px 4px;
+}
+
+.aquelarre .sheet-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  font-size: 0.8em;
+  font-family: var(--aq-font-heading);
+  color: var(--aq-color-header);
+  border: 1px solid var(--aq-color-border);
+  border-radius: 3px;
+  background: transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+
+.aquelarre .sheet-action-btn:hover {
+  background: var(--aq-color-accent);
+  color: #fff;
+  border-color: var(--aq-color-accent);
+}
+
+.aquelarre .btn-descanso i { color: inherit; }
+
 /* ---------- Pestañas ---------- */
 .aquelarre .sheet-tabs {
   border-bottom: 2px solid var(--aq-color-border);
@@ -408,4 +439,298 @@
 .flexcol {
   display: flex;
   flex-direction: column;
+}
+
+/* ============================================================
+   SISTEMA DE MAGIA
+   ============================================================ */
+
+/* ── Cabecera de sección (Conjuros / Componentes) ──────────── */
+.aquelarre .magia-section-header {
+  align-items: center;
+  margin: 4px 0 2px;
+  gap: 6px;
+}
+
+.aquelarre .magia-section-title {
+  font-family: var(--aq-font-heading);
+  font-size: 0.95em;
+  font-weight: bold;
+  color: var(--aq-color-accent);
+  margin: 0;
+  flex: 1;
+  border-bottom: 1px solid var(--aq-color-accent);
+  padding-bottom: 2px;
+}
+
+.aquelarre .magia-add-btn {
+  cursor: pointer;
+  color: var(--aq-color-accent);
+  font-size: 0.9em;
+  opacity: 0.7;
+  padding: 0 4px;
+}
+
+.aquelarre .magia-add-btn:hover {
+  opacity: 1;
+}
+
+/* ── Columnas de la lista de hechizos ──────────────────────── */
+.aquelarre .magia-col-tipo  { flex: 0 0 68px;  text-align: center; }
+.aquelarre .magia-col-nivel { flex: 0 0 34px;  text-align: center; }
+.aquelarre .magia-col-forma { flex: 0 0 78px;  text-align: center; }
+.aquelarre .magia-col-exp   { flex: 0 0 68px;  text-align: center; }
+.aquelarre .magia-col-dur   { flex: 0 0 68px;  text-align: center; }
+.aquelarre .magia-col-proc  { flex: 0 0 70px;  text-align: center; }
+.aquelarre .magia-col-nat   { flex: 0 0 58px;  text-align: center; }
+.aquelarre .magia-col-orig  { flex: 0 0 70px;  text-align: center; }
+
+/* ── Hechizo: fila principal ───────────────────────────────── */
+.aquelarre .hechizo-item {
+  border-bottom: 1px solid rgba(139, 125, 107, 0.3);
+  padding: 0;
+}
+
+.aquelarre .hechizo-main-row {
+  align-items: center;
+  gap: 6px;
+  padding: 3px 0 1px;
+}
+
+/* ── Badge de tipo conjuro/milagro ─────────────────────────── */
+.aquelarre .tipo-badge {
+  display: inline-block;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 0.75em;
+  font-family: var(--aq-font-heading);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.aquelarre .tipo-badge.tipo-conjuro {
+  background: rgba(60, 40, 100, 0.12);
+  color: #4a2d80;
+  border: 1px solid rgba(74, 45, 128, 0.35);
+}
+
+.aquelarre .tipo-badge.tipo-milagro {
+  background: rgba(180, 130, 10, 0.12);
+  color: #7a5800;
+  border: 1px solid rgba(122, 88, 0, 0.35);
+}
+
+/* ── Badge de nivel Vis/Ordo ───────────────────────────────── */
+.aquelarre .vis-badge {
+  display: inline-block;
+  font-family: var(--aq-font-heading);
+  font-weight: bold;
+  font-size: 0.85em;
+  color: var(--aq-color-accent);
+}
+
+/* ── Punto de naturaleza (blanca/negra) ────────────────────── */
+.aquelarre .naturaleza-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  margin-right: 4px;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.aquelarre .naturaleza-dot.nat-blanca {
+  background: #c8b88a;
+  border: 1px solid #8b7d6b;
+}
+
+.aquelarre .naturaleza-dot.nat-negra {
+  background: #4a2020;
+  border: 1px solid #8b0000;
+}
+
+/* ── Tira de componentes ───────────────────────────────────── */
+.aquelarre .hechizo-componentes-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 3px 2px 5px 18px;
+  min-height: 22px;
+}
+
+/* ── Tag de componente ─────────────────────────────────────── */
+.aquelarre .comp-tag-wrapper {
+  position: relative;
+}
+
+.aquelarre .comp-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 7px 2px 5px;
+  border-radius: 10px;
+  border: 1px solid var(--aq-color-border);
+  background: rgba(139, 125, 107, 0.1);
+  font-size: 0.78em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s;
+  user-select: none;
+}
+
+.aquelarre .comp-tag:hover {
+  background: rgba(139, 0, 0, 0.08);
+  border-color: var(--aq-color-accent);
+}
+
+.aquelarre .comp-tag-wrapper.expanded .comp-tag {
+  background: rgba(60, 40, 80, 0.1);
+  border-color: #6a4a9a;
+}
+
+/* Colores por procedencia */
+.aquelarre .comp-tag-wrapper.proc-vegetal   .comp-tag { border-left: 3px solid #4a7a30; }
+.aquelarre .comp-tag-wrapper.proc-mineral   .comp-tag { border-left: 3px solid #7a6040; }
+.aquelarre .comp-tag-wrapper.proc-animal    .comp-tag { border-left: 3px solid #9a5020; }
+.aquelarre .comp-tag-wrapper.proc-humano    .comp-tag { border-left: 3px solid #8a2040; }
+.aquelarre .comp-tag-wrapper.proc-irracional .comp-tag { border-left: 3px solid #4a2080; }
+
+/* Icono × para quitar componente */
+.aquelarre .comp-tag .remove-comp {
+  font-size: 0.85em;
+  opacity: 0;
+  color: var(--aq-color-accent);
+  transition: opacity 0.15s;
+  margin-left: 2px;
+  cursor: pointer;
+}
+
+.aquelarre .comp-tag:hover .remove-comp {
+  opacity: 0.7;
+}
+
+.aquelarre .comp-tag .remove-comp:hover {
+  opacity: 1 !important;
+}
+
+/* ── Panel de detalle del componente ───────────────────────── */
+.aquelarre .comp-tag-panel {
+  display: none;
+  position: relative;
+  background: #faf5e8;
+  border: 1px solid var(--aq-color-border);
+  border-radius: 4px;
+  padding: 5px 8px;
+  margin-top: 2px;
+  font-size: 0.8em;
+  z-index: 10;
+  min-width: 200px;
+  box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.aquelarre .comp-panel-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px 8px;
+  margin-bottom: 3px;
+}
+
+.aquelarre .comp-panel-efecto {
+  border-top: 1px solid rgba(139, 125, 107, 0.3);
+  padding-top: 3px;
+  margin-top: 2px;
+  font-style: italic;
+}
+
+/* ── Botón «+ comp.» para añadir ──────────────────────────── */
+.aquelarre .comp-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 6px;
+  font-size: 0.75em;
+  color: var(--aq-color-accent);
+  border: 1px dashed var(--aq-color-accent);
+  border-radius: 10px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.15s;
+}
+
+.aquelarre .comp-add-btn:hover {
+  opacity: 1;
+}
+
+/* ── Badges en la lista de componentes ─────────────────────── */
+.aquelarre .proc-badge {
+  display: inline-block;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 0.75em;
+  text-transform: capitalize;
+  background: rgba(139, 125, 107, 0.12);
+  border: 1px solid rgba(139, 125, 107, 0.3);
+}
+
+.aquelarre .comp-tipo-badge {
+  display: inline-block;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 0.75em;
+  font-family: var(--aq-font-heading);
+}
+
+.aquelarre .comp-tipo-badge.niv-tipo1 { background: rgba(70, 150, 70, 0.12); border: 1px solid rgba(70, 150, 70, 0.4); color: #2a6a2a; }
+.aquelarre .comp-tipo-badge.niv-tipo2 { background: rgba(200, 140, 20, 0.12); border: 1px solid rgba(200, 140, 20, 0.4); color: #7a5600; }
+.aquelarre .comp-tipo-badge.niv-tipo3 { background: rgba(160, 40, 40, 0.12);  border: 1px solid rgba(160, 40, 40, 0.4);  color: #8b0000; }
+
+/* ── Nota de hint ─────────────────────────────────────────── */
+.aquelarre .hint {
+  font-style: italic;
+  color: #666;
+  font-size: 0.85em;
+  padding: 4px 0;
+}
+
+/* ── Componentes requeridos (referencia de compendio, sólo lectura) ── */
+.aquelarre .comp-requeridos {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 6px 8px 8px;
+  margin-bottom: 8px;
+  background: rgba(139, 125, 107, 0.06);
+  border: 1px solid rgba(139, 125, 107, 0.25);
+  border-radius: 4px;
+}
+
+.aquelarre .comp-requeridos-label {
+  font-family: var(--aq-font-heading);
+  font-size: 0.78em;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #5a4a3a;
+  white-space: nowrap;
+  padding-top: 2px;
+}
+
+.aquelarre .comp-requeridos-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.aquelarre .comp-req-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(106, 74, 154, 0.45);
+  background: rgba(106, 74, 154, 0.08);
+  font-size: 0.78em;
+  color: #3d2a5e;
+  white-space: nowrap;
+  cursor: default;
 }

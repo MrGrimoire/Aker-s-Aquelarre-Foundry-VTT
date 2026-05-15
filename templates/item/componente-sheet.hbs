@@ -1,0 +1,82 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+  <header class="sheet-header flexrow">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" width="60" height="60" />
+    <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Nombre del componente" /></h1>
+  </header>
+
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="datos">Datos</a>
+    <a class="item" data-tab="preparacion">Preparación</a>
+    <a class="item" data-tab="descripcion">Descripción</a>
+  </nav>
+
+  <section class="sheet-body">
+    {{!-- ── Pestaña: Datos ── --}}
+    <div class="tab" data-group="primary" data-tab="datos">
+
+      <div class="form-group">
+        <label>Procedencia</label>
+        <select name="system.procedencia">
+          {{#select system.procedencia}}
+          <option value="vegetal">Vegetal</option>
+          <option value="mineral">Mineral</option>
+          <option value="animal">Animal</option>
+          <option value="humano">Humano</option>
+          <option value="irracional">Irracional</option>
+          {{/select}}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Tipo</label>
+        <select name="system.tipoComponente">
+          {{#select system.tipoComponente}}
+          <option value="tipo1">Tipo 1 — Común</option>
+          <option value="tipo2">Tipo 2 — Potente o raro</option>
+          <option value="tipo3">Tipo 3 — Potente y raro</option>
+          {{/select}}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Naturaleza</label>
+        <select name="system.naturaleza">
+          {{#select system.naturaleza}}
+          <option value="blanca">Blanca</option>
+          <option value="negra">Negra</option>
+          {{/select}}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Origen</label>
+        <select name="system.origen">
+          {{#select system.origen}}
+          <option value="popular">Popular</option>
+          <option value="alquimico">Alquímico</option>
+          <option value="infernal">Infernal</option>
+          <option value="prohibido">Prohibido</option>
+          {{/select}}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Efecto</label>
+        <input type="text" name="system.efecto" value="{{system.efecto}}" placeholder="Breve descripción del efecto mágico" />
+      </div>
+
+    </div>
+
+    {{!-- ── Pestaña: Preparación ── --}}
+    <div class="tab" data-group="primary" data-tab="preparacion">
+      <div class="editor-container">
+        {{editor system.preparacion target="system.preparacion" button=true editable=editable}}
+      </div>
+    </div>
+
+    {{!-- ── Pestaña: Descripción ── --}}
+    <div class="tab" data-group="primary" data-tab="descripcion">
+      {{> "systems/akers_aquelarre/templates/item/parts/item-descripcion.hbs"}}
+    </div>
+  </section>
+</form>

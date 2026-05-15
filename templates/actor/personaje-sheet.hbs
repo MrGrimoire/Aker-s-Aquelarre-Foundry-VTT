@@ -51,6 +51,15 @@
     </div>
   </section>
 
+  {{!-- BARRA DE ACCIONES --}}
+  {{#if editable}}
+  <div class="sheet-actions flexrow">
+    <a class="sheet-action-btn btn-descanso" title="Descansar y recuperar PC/PF">
+      <i class="fas fa-bed"></i> Descansar
+    </a>
+  </div>
+  {{/if}}
+
   {{!-- PESTAÑAS --}}
   <nav class="sheet-tabs tabs" data-group="primary">
     <a class="item" data-tab="caracteristicas">Características</a>

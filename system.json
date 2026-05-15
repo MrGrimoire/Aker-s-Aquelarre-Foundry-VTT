@@ -36,6 +36,7 @@
       "arma": {},
       "armadura": {},
       "competencia": {},
+      "componente": {},
       "hechizo": {},
       "profesion": {},
       "equipo": {},
@@ -43,6 +44,29 @@
     }
   },
   "socket": false,
+  "packs": [
+    {
+      "name": "ars-magica",
+      "label": "Ars Magica — Conjuros",
+      "path": "packs/ars-magica",
+      "type": "Item",
+      "system": "akers_aquelarre"
+    },
+    {
+      "name": "ars-theologica",
+      "label": "Ars Theologica — Milagros",
+      "path": "packs/ars-theologica",
+      "type": "Item",
+      "system": "akers_aquelarre"
+    },
+    {
+      "name": "componentes-magicos",
+      "label": "Componentes Mágicos",
+      "path": "packs/componentes-magicos",
+      "type": "Item",
+      "system": "akers_aquelarre"
+    }
+  ],
   "initiative": "1d10 + @iniciativa",
   "grid": {
     "distance": 1.5,
